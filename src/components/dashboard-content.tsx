@@ -162,7 +162,7 @@ function OrganizationDashboard({ organization }: { organization: Organization })
               href="/audit"
               icon="🔒"
               label="Security Audit"
-              feature="security_audit"
+              feature="audit"
               requiredPlanLabel="Business Standard"
             />
           </CardContent>

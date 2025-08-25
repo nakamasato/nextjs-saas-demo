@@ -17,8 +17,8 @@ export default async function AuditPage() {
     redirect('/')  // Redirect to dashboard to select organization
   }
 
-  // Check if organization has access to security_audit feature
-  const hasAccess = has({ feature: 'security_audit' })
+  // Check if organization has access to audit feature
+  const hasAccess = has({ feature: 'audit' })
 
   if (!hasAccess) {
     return (
