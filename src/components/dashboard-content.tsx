@@ -104,12 +104,18 @@ interface Organization {
 function OrganizationDashboard({ organization }: { organization: Organization }) {
   const { has } = useAuth()
   
+  // Early return if has is not available (should not happen with proper Clerk setup)
+  if (!has) {
+    console.error('Clerk has() function is not available')
+    return <div>Loading...</div>
+  }
+  
   // Check plans using Clerk Billing
-  const hasAnalysis = has!({ plan: 'business_starter' }) || 
-                     has!({ plan: 'business_standard' }) || 
-                     has!({ plan: 'enterprise' })
-  const hasAudit = has!({ plan: 'business_standard' }) || 
-                  has!({ plan: 'enterprise' })
+  const hasAnalysis = has({ plan: 'business_starter' }) || 
+                     has({ plan: 'business_standard' }) || 
+                     has({ plan: 'enterprise' })
+  const hasAudit = has({ plan: 'business_standard' }) || 
+                  has({ plan: 'enterprise' })
 
   return (
     <div className="container mx-auto px-4 py-8">
