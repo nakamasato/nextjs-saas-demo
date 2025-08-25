@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { Building2 } from 'lucide-react'
-import { useEffect, useState } from 'react'
 
 export function DashboardContent() {
   const { organization, isLoaded } = useOrganization()
@@ -104,22 +103,13 @@ interface Organization {
 
 function OrganizationDashboard({ organization }: { organization: Organization }) {
   const { has } = useAuth()
-  const [hasAnalysis, setHasAnalysis] = useState(false)
-  const [hasAudit, setHasAudit] = useState(false)
-
-  useEffect(() => {
-    const checkPermissions = async () => {
-      if (!has) return
-      
-      const analysisAccess = await has({ permission: "org:analysis:access" })
-      const auditAccess = await has({ permission: "org:audit:access" })
-      
-      setHasAnalysis(analysisAccess || false)
-      setHasAudit(auditAccess || false)
-    }
-    
-    checkPermissions()
-  }, [has])
+  
+  // Check plans using Clerk Billing
+  const hasAnalysis = has({ plan: 'business_starter' }) || 
+                     has({ plan: 'business_standard' }) || 
+                     has({ plan: 'enterprise' })
+  const hasAudit = has({ plan: 'business_standard' }) || 
+                  has({ plan: 'enterprise' })
 
   return (
     <div className="container mx-auto px-4 py-8">

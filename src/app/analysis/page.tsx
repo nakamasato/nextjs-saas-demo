@@ -4,7 +4,6 @@ import { Header } from '@/components/header'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { BarChart3, TrendingUp, Users, DollarSign, Lock } from 'lucide-react'
-// import { getUserSubscription, hasAccessToFeature, getRequiredPlanForFeature } from '@/lib/subscription'
 import Link from 'next/link'
 
 export default async function AnalysisPage() {
@@ -14,8 +13,10 @@ export default async function AnalysisPage() {
     redirect('/sign-in')
   }
 
-  // Check if organization has analysis access permission
-  const hasAccess = await has({ permission: "org:analysis:access" })
+  // Check if organization has business_starter plan or higher
+  const hasAccess = has({ plan: 'business_starter' }) || 
+                   has({ plan: 'business_standard' }) || 
+                   has({ plan: 'enterprise' })
 
   return (
     <div className="min-h-screen bg-white">

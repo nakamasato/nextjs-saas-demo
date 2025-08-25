@@ -4,7 +4,6 @@ import { Header } from '@/components/header'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Shield, AlertTriangle, CheckCircle, XCircle, Clock, Lock } from 'lucide-react'
-// import { getUserSubscription, hasAccessToFeature, getRequiredPlanForFeature } from '@/lib/subscription'
 import Link from 'next/link'
 
 export default async function AuditPage() {
@@ -14,8 +13,9 @@ export default async function AuditPage() {
     redirect('/sign-in')
   }
 
-  // Check if organization has audit access permission
-  const hasAccess = await has({ permission: "org:audit:access" })
+  // Check if organization has business_standard plan or higher
+  const hasAccess = has({ plan: 'business_standard' }) || 
+                   has({ plan: 'enterprise' })
 
   if (!hasAccess) {
     return (
