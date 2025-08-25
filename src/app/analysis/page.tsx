@@ -17,8 +17,8 @@ export default async function AnalysisPage() {
     redirect('/')  // Redirect to dashboard to select organization
   }
 
-  // Check if organization has access to widgets feature
-  const hasAccess = has({ feature: 'widgets' })
+  // Check if organization has access to analytics feature
+  const hasAccess = has({ feature: 'analytics' })
 
   return (
     <div className="min-h-screen bg-white">

@@ -155,7 +155,7 @@ function OrganizationDashboard({ organization }: { organization: Organization })
               href="/analysis"
               icon="📊"
               label="View Analytics"
-              feature="widgets"
+              feature="analytics"
               requiredPlanLabel="Business Starter"
             />
             <FeatureButton
