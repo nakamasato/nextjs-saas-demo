@@ -105,11 +105,11 @@ function OrganizationDashboard({ organization }: { organization: Organization })
   const { has } = useAuth()
   
   // Check plans using Clerk Billing
-  const hasAnalysis = has({ plan: 'business_starter' }) || 
-                     has({ plan: 'business_standard' }) || 
-                     has({ plan: 'enterprise' })
-  const hasAudit = has({ plan: 'business_standard' }) || 
-                  has({ plan: 'enterprise' })
+  const hasAnalysis = has!({ plan: 'business_starter' }) || 
+                     has!({ plan: 'business_standard' }) || 
+                     has!({ plan: 'enterprise' })
+  const hasAudit = has!({ plan: 'business_standard' }) || 
+                  has!({ plan: 'enterprise' })
 
   return (
     <div className="container mx-auto px-4 py-8">
