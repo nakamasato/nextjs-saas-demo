@@ -6,3 +6,4 @@ This is a Nextjs SaaS Demo app with the following features:
 ## Development Rules
 
 1. Do not run local server (`npm run dev`).
+1. Commit message and GitHub PR title should follow the conventional commit.
