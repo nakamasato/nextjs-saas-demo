@@ -1,15 +1,22 @@
 import { auth } from '@clerk/nextjs/server'
-import { Navbar } from '@/components/navbar'
+import { Header } from '@/components/header'
+import { DashboardContent } from '@/components/dashboard-content'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import Link from 'next/link'
 import { CheckCircle, BarChart3, Shield, Users, Zap, Sparkles, TrendingUp, Globe, Clock } from 'lucide-react'
+// import { getUserSubscription, ensureCustomerExists } from '@/lib/subscription'
 
 export default async function Home() {
   const { userId } = await auth()
 
   if (userId) {
-    return <Dashboard />
+    return (
+      <div className="min-h-screen bg-white">
+        <Header />
+        <DashboardContent />
+      </div>
+    )
   }
 
   return <LandingPage />
@@ -18,7 +25,7 @@ export default async function Home() {
 function LandingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50/30">
-      <Navbar />
+      <Header />
       
       <main className="container mx-auto px-4 py-16">
         {/* Hero Section */}
@@ -336,76 +343,3 @@ function LandingPage() {
   )
 }
 
-function Dashboard() {
-  return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
-      
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
-          <p className="text-slate-600">Welcome back! Here&apos;s what&apos;s happening with your account.</p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Account Status</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-green-600">Active</div>
-              <p className="text-sm text-gray-500">Your subscription is active</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Current Plan</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">Free Trial</div>
-              <p className="text-sm text-gray-500">29 days remaining</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Usage This Month</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">0 / ∞</div>
-              <p className="text-sm text-gray-500">API calls used</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Quick Actions</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <Button className="w-full justify-start" variant="outline" asChild>
-                <Link href="/analysis">📊 View Analytics</Link>
-              </Button>
-              <Button className="w-full justify-start" variant="outline" asChild>
-                <Link href="/audit">🔒 Security Audit</Link>
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Recent Activity</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-8 text-gray-500">
-                No recent activity to show
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </main>
-    </div>
-  )
-}

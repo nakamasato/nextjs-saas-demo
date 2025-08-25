@@ -1,25 +1,25 @@
 import { auth } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
-import { Navbar } from '@/components/navbar'
+import { Header } from '@/components/header'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { BarChart3, TrendingUp, Users, DollarSign, Lock } from 'lucide-react'
-import { getUserSubscription, hasAccessToFeature, getRequiredPlanForFeature } from '@/lib/subscription'
+// import { getUserSubscription, hasAccessToFeature, getRequiredPlanForFeature } from '@/lib/subscription'
 import Link from 'next/link'
 
 export default async function AnalysisPage() {
-  const { userId } = await auth()
+  const { userId, has } = await auth()
   
   if (!userId) {
     redirect('/sign-in')
   }
 
-  const subscription = await getUserSubscription(userId)
-  const hasAccess = hasAccessToFeature(subscription, 'analysis')
+  // Check if organization has analysis access permission
+  const hasAccess = await has({ permission: "org:analysis:access" })
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
+      <Header />
       
       <div className="relative">
         {/* Blurred content */}
@@ -35,7 +35,7 @@ export default async function AnalysisPage() {
                 <Lock className="h-16 w-16 mx-auto mb-4 text-gray-400" />
                 <h1 className="text-3xl font-bold mb-2">Upgrade Required</h1>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Access to Business Analysis requires {getRequiredPlanForFeature('analysis')}.
+                  Access to Business Analysis requires Business Starter plan or higher.
                 </p>
               </div>
               
@@ -73,9 +73,9 @@ function AnalysisContent() {
           <p className="text-gray-600 dark:text-gray-400">
             Comprehensive analytics and insights for your business.
           </p>
-          <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-950 rounded-lg border border-blue-200 dark:border-blue-800">
-            <p className="text-sm text-blue-800 dark:text-blue-200">
-              📊 <strong>Business Starter Plan Required:</strong> This feature is available for Business Starter subscribers and above.
+          <div className="mt-4 p-4 bg-green-50 dark:bg-green-950 rounded-lg border border-green-200 dark:border-green-800">
+            <p className="text-sm text-green-800 dark:text-green-200">
+              ✅ <strong>Available with Business Starter Plan:</strong> You have access to Business Analytics features.
             </p>
           </div>
         </div>

@@ -1,26 +1,26 @@
 import { auth } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
-import { Navbar } from '@/components/navbar'
+import { Header } from '@/components/header'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Shield, AlertTriangle, CheckCircle, XCircle, Clock, Lock } from 'lucide-react'
-import { getUserSubscription, hasAccessToFeature, getRequiredPlanForFeature } from '@/lib/subscription'
+// import { getUserSubscription, hasAccessToFeature, getRequiredPlanForFeature } from '@/lib/subscription'
 import Link from 'next/link'
 
 export default async function AuditPage() {
-  const { userId } = await auth()
+  const { userId, has } = await auth()
   
   if (!userId) {
     redirect('/sign-in')
   }
 
-  const subscription = await getUserSubscription(userId)
-  const hasAccess = hasAccessToFeature(subscription, 'audit')
+  // Check if organization has audit access permission
+  const hasAccess = await has({ permission: "org:audit:access" })
 
   if (!hasAccess) {
     return (
       <div className="min-h-screen bg-white">
-        <Navbar />
+        <Header />
         
         <main className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto text-center">
@@ -28,7 +28,7 @@ export default async function AuditPage() {
               <Lock className="h-16 w-16 mx-auto mb-4 text-gray-400" />
               <h1 className="text-3xl font-bold mb-2">Upgrade Required</h1>
               <p className="text-gray-600 dark:text-gray-400">
-                Access to Security Audit requires {getRequiredPlanForFeature('audit')}.
+                Access to Security Audit requires Business Standard plan or higher.
               </p>
             </div>
             
@@ -58,7 +58,7 @@ export default async function AuditPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
+      <Header />
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">

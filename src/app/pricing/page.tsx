@@ -1,13 +1,12 @@
-import { Navbar } from '@/components/navbar'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import Link from 'next/link'
-import { Check, X, Star } from 'lucide-react'
+import { PricingTable } from '@clerk/nextjs'
+import { Header } from '@/components/header'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Star } from 'lucide-react'
 
 export default function PricingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50/30">
-      <Navbar />
+      <Header />
       
       <main className="container mx-auto px-4 py-16">
         {/* Header */}
@@ -16,7 +15,7 @@ export default function PricingPage() {
             Choose Your Plan
           </h1>
           <p className="text-xl text-slate-600 mb-8 max-w-3xl mx-auto">
-            Start with our free features, then upgrade to unlock advanced analytics and security tools.
+            All plans are billed per organization. Create an organization to subscribe to a plan.
           </p>
           <div className="inline-flex items-center gap-2 bg-green-50 text-green-800 px-4 py-2 rounded-full text-sm font-medium">
             <Star className="h-4 w-4 fill-current" />
@@ -24,197 +23,29 @@ export default function PricingPage() {
           </div>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-6 max-w-7xl mx-auto mb-16">
-          {/* Free Plan */}
-          <Card className="relative">
-            <CardHeader>
-              <CardTitle>Free</CardTitle>
-              <CardDescription className="text-3xl font-bold">$0<span className="text-sm font-normal">/month</span></CardDescription>
-              <p className="text-sm text-slate-600">Perfect for getting started</p>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <Button className="w-full" variant="outline" asChild>
-                <Link href="/sign-up">Get Started Free</Link>
-              </Button>
-              
-              <div className="space-y-3">
-                <h4 className="font-semibold text-sm">Features included:</h4>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>Basic dashboard access</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>Profile management</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>Email support</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <X className="h-4 w-4 text-red-500" />
-                    <span className="text-slate-400">No analytics access</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <X className="h-4 w-4 text-red-500" />
-                    <span className="text-slate-400">No security audit</span>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Business Starter */}
-          <Card className="relative">
-            <CardHeader>
-              <CardTitle>Business Starter</CardTitle>
-              <CardDescription className="text-3xl font-bold">$19<span className="text-sm font-normal">/month/user</span></CardDescription>
-              <p className="text-sm text-slate-600">Perfect for small teams</p>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <Button className="w-full" asChild>
-                <Link href="/sign-up">Start Free Trial</Link>
-              </Button>
-              
-              <div className="space-y-3">
-                <h4 className="font-semibold text-sm">Everything in Free, plus:</h4>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span><strong>Business Analytics</strong></span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>Revenue & growth tracking</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>User activity monitoring</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>Feature usage statistics</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <X className="h-4 w-4 text-red-500" />
-                    <span className="text-slate-400">No security audit</span>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Business Standard - Most Popular */}
-          <Card className="relative border-2 border-blue-500 shadow-lg">
-            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
-              Most Popular
-            </div>
-            <CardHeader>
-              <CardTitle>Business Standard</CardTitle>
-              <CardDescription className="text-3xl font-bold">$39<span className="text-sm font-normal">/month/user</span></CardDescription>
-              <p className="text-sm text-slate-600">For growing businesses</p>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <Button className="w-full" asChild>
-                <Link href="/sign-up">Start Free Trial</Link>
-              </Button>
-              
-              <div className="space-y-3">
-                <h4 className="font-semibold text-sm">Everything in Starter, plus:</h4>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span><strong>Security Audit</strong></span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>Real-time security monitoring</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>Compliance reporting</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>Vulnerability scanning</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>Priority support</span>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Enterprise */}
-          <Card className="relative">
-            <CardHeader>
-              <CardTitle>Enterprise</CardTitle>
-              <CardDescription className="text-3xl font-bold">$99<span className="text-sm font-normal">/month/user</span></CardDescription>
-              <p className="text-sm text-slate-600">For large organizations</p>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <Button className="w-full" variant="outline" asChild>
-                <Link href="/sign-up">Contact Sales</Link>
-              </Button>
-              
-              <div className="space-y-3">
-                <h4 className="font-semibold text-sm">Everything in Standard, plus:</h4>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>Custom integrations</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>Advanced reporting</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>Dedicated support</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>Custom training</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>SLA guarantee</span>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+        {/* Clerk Pricing Table */}
+        <div className="max-w-7xl mx-auto mb-16">
+          <PricingTable forOrganizations />
         </div>
 
-        {/* Pay-as-you-go Section */}
+        {/* Organization Billing Notice */}
         <div className="max-w-2xl mx-auto mb-16">
-          <Card>
-            <CardHeader className="text-center">
-              <CardTitle>Pay-as-you-go</CardTitle>
-              <CardDescription className="text-2xl font-bold">$10<span className="text-sm font-normal"> per 100 credits</span></CardDescription>
-              <p className="text-sm text-slate-600">Flexible usage-based pricing</p>
+          <Card className="bg-blue-50 border-blue-200">
+            <CardHeader>
+              <CardTitle className="text-center">Organization-Based Billing</CardTitle>
             </CardHeader>
-            <CardContent className="text-center space-y-4">
-              <Button className="w-full max-w-sm" variant="outline" asChild>
-                <Link href="/sign-up">Buy Credits</Link>
-              </Button>
-              
-              <div className="grid md:grid-cols-3 gap-4 text-sm">
-                <div className="flex items-center justify-center gap-2">
-                  <Check className="h-4 w-4 text-green-500" />
-                  <span>No monthly commitment</span>
+            <CardContent>
+              <p className="text-center text-slate-600 mb-4">
+                All subscriptions are tied to organizations. Even individual users need to create an organization to subscribe to paid plans.
+              </p>
+              <div className="grid md:grid-cols-2 gap-4 text-sm">
+                <div className="bg-white p-4 rounded-lg">
+                  <h4 className="font-semibold mb-2">👤 Personal Account</h4>
+                  <p className="text-slate-600">Access to free features only. Create an organization to unlock premium features.</p>
                 </div>
-                <div className="flex items-center justify-center gap-2">
-                  <Check className="h-4 w-4 text-green-500" />
-                  <span>Maximum 5 team members</span>
-                </div>
-                <div className="flex items-center justify-center gap-2">
-                  <Check className="h-4 w-4 text-green-500" />
-                  <span>Basic features only</span>
+                <div className="bg-white p-4 rounded-lg">
+                  <h4 className="font-semibold mb-2">🏢 Organization Account</h4>
+                  <p className="text-slate-600">Subscribe to paid plans and share access with team members.</p>
                 </div>
               </div>
             </CardContent>
@@ -227,7 +58,7 @@ export default function PricingPage() {
           
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h3 className="font-semibold mb-2">What's included in the free trial?</h3>
+              <h3 className="font-semibold mb-2">What&apos;s included in the free trial?</h3>
               <p className="text-slate-600 text-sm">All paid plans include a 30-day free trial with full access to all features in that tier.</p>
             </div>
             
