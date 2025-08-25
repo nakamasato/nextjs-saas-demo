@@ -31,8 +31,8 @@ Open [http://localhost:3000](http://localhost:3000)
     1. Feature
         1. Landing Page (`/` for non-logged-in users)
         1. Core feature (`/` after login)
-        1. Analysis feature: only accessible for Business Starter or higher
-            1. `/analysis`
+        1. Analytics feature: only accessible for Business Starter or higher
+            1. `/analytics`
         1. Security feature: only Business Standard or higher
             1. `/audit`
 
@@ -108,7 +108,7 @@ npm start
 1. Visit `http://localhost:3000`
 2. Sign up using email/password or Google OAuth
 3. Explore the dashboard
-4. Try accessing `/analysis` or `/audit` (requires subscription)
+4. Try accessing `/analytics` or `/audit` (requires subscription)
 5. Test the subscription flow with Stripe test cards:
    - Success: `4242 4242 4242 4242`
    - Any future expiry date and any 3-digit CVC
@@ -131,7 +131,7 @@ stripe listen --forward-to localhost:3000/api/webhooks/stripe
 src/
 ├── app/
 │   ├── (auth)/          # Authentication pages
-│   ├── analysis/        # Business analytics (Business Starter+)
+│   ├── analytics/       # Business analytics (Business Starter+)
 │   ├── audit/          # Security audit (Business Standard+)
 │   ├── api/            # API routes
 │   └── page.tsx        # Landing/Dashboard
@@ -155,8 +155,8 @@ src/
 - **Landing Page**: Marketing page for non-authenticated users
 - **Dashboard**: User dashboard with account overview
 - **Subscription Tiers**:
-  - Business Starter ($19/month) - Analysis access
-  - Business Standard ($39/month) - Analysis + Audit access
+  - Business Starter ($19/month) - Analytics access
+  - Business Standard ($39/month) - Analytics + Audit access
   - Enterprise ($99/month) - All features
   - Pay-as-you-go ($10/100 credits) - Basic features
 - **Access Control**: Role-based feature restrictions with upgrade prompts

@@ -4,61 +4,72 @@ import { Header } from '@/components/header'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Shield, AlertTriangle, CheckCircle, XCircle, Clock, Lock } from 'lucide-react'
-// import { getUserSubscription, hasAccessToFeature, getRequiredPlanForFeature } from '@/lib/subscription'
 import Link from 'next/link'
 
 export default async function AuditPage() {
-  const { userId, has } = await auth()
+  const { userId, orgId, has } = await auth()
   
   if (!userId) {
     redirect('/sign-in')
   }
 
-  // Check if organization has audit access permission
-  const hasAccess = await has({ permission: "org:audit:access" })
-
-  if (!hasAccess) {
-    return (
-      <div className="min-h-screen bg-white">
-        <Header />
-        
-        <main className="container mx-auto px-4 py-8">
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="mb-8">
-              <Lock className="h-16 w-16 mx-auto mb-4 text-gray-400" />
-              <h1 className="text-3xl font-bold mb-2">Upgrade Required</h1>
-              <p className="text-gray-600 dark:text-gray-400">
-                Access to Security Audit requires Business Standard plan or higher.
-              </p>
-            </div>
-            
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle>Security Audit Features</CardTitle>
-                <CardDescription>Comprehensive security assessment and compliance monitoring</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="text-left space-y-2 mb-6">
-                  <li>• Real-time security monitoring</li>
-                  <li>• Compliance framework assessment</li>
-                  <li>• Vulnerability scanning</li>
-                  <li>• Access control auditing</li>
-                  <li>• Data protection analysis</li>
-                </ul>
-                <Button size="lg" asChild>
-                  <Link href="/pricing">View Pricing Plans</Link>
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </main>
-      </div>
-    )
+  if (!orgId) {
+    redirect('/')  // Redirect to dashboard to select organization
   }
+
+  // Check if organization has access to audit feature
+  const hasAccess = has({ feature: 'audit' })
 
   return (
     <div className="min-h-screen bg-white">
       <Header />
+      
+      <div className="relative">
+        {/* Blurred content */}
+        <div className={hasAccess ? '' : 'blur-sm pointer-events-none'}>
+          <AuditContent />
+        </div>
+        
+        {/* Overlay for non-subscribers */}
+        {!hasAccess && (
+          <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
+            <div className="max-w-2xl mx-auto text-center p-8">
+              <div className="mb-8">
+                <Lock className="h-16 w-16 mx-auto mb-4 text-gray-400" />
+                <h1 className="text-3xl font-bold mb-2">Upgrade Required</h1>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Access to Security Audit requires Business Standard plan or higher.
+                </p>
+              </div>
+              
+              <Card className="mb-8">
+                <CardHeader>
+                  <CardTitle>Security Audit Features</CardTitle>
+                  <CardDescription>Comprehensive security assessment and compliance monitoring</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="text-left space-y-2 mb-6">
+                    <li>• Real-time security monitoring</li>
+                    <li>• Compliance framework assessment</li>
+                    <li>• Vulnerability scanning</li>
+                    <li>• Access control auditing</li>
+                    <li>• Data protection analysis</li>
+                  </ul>
+                  <Button size="lg" asChild>
+                    <Link href="/pricing">View Pricing Plans</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function AuditContent() {
+  return (
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
@@ -326,6 +337,5 @@ export default async function AuditPage() {
           </Card>
         </div>
       </main>
-    </div>
   )
 }
