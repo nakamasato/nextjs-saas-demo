@@ -7,16 +7,18 @@ import { BarChart3, TrendingUp, Users, DollarSign, Lock } from 'lucide-react'
 import Link from 'next/link'
 
 export default async function AnalysisPage() {
-  const { userId, has } = await auth()
+  const { userId, orgId, has } = await auth()
   
   if (!userId) {
     redirect('/sign-in')
   }
 
-  // Check if organization has business_starter plan or higher
-  const hasAccess = has({ plan: 'business_starter' }) || 
-                   has({ plan: 'business_standard' }) || 
-                   has({ plan: 'enterprise' })
+  if (!orgId) {
+    redirect('/')  // Redirect to dashboard to select organization
+  }
+
+  // Check if organization has access to widgets feature
+  const hasAccess = has({ feature: 'widgets' })
 
   return (
     <div className="min-h-screen bg-white">

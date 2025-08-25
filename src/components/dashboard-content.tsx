@@ -10,37 +10,32 @@ interface FeatureButtonProps {
   href: string
   icon: string
   label: string
-  requiredPlans: string[]
+  feature: string
   requiredPlanLabel: string
 }
 
-function FeatureButton({ href, icon, label, requiredPlans, requiredPlanLabel }: FeatureButtonProps) {
+function FeatureButton({ href, icon, label, feature, requiredPlanLabel }: FeatureButtonProps) {
   return (
-    <>
-      {requiredPlans.map((plan) => (
-        <Protect key={plan} plan={plan}>
-          <Button 
-            className="w-full justify-start" 
-            variant="outline"
-            asChild
-          >
-            <Link href={href}>{icon} {label}</Link>
-          </Button>
-        </Protect>
-      ))}
-      <Protect
-        fallback={
-          <Button 
-            className="w-full justify-start" 
-            variant="secondary"
-            disabled
-          >
-            {icon} {label} ({requiredPlanLabel} Required)
-          </Button>
-        }
-        plan="free"
-      />
-    </>
+    <Protect
+      feature={feature}
+      fallback={
+        <Button 
+          className="w-full justify-start" 
+          variant="secondary"
+          disabled
+        >
+          {icon} {label} ({requiredPlanLabel} Required)
+        </Button>
+      }
+    >
+      <Button 
+        className="w-full justify-start" 
+        variant="outline"
+        asChild
+      >
+        <Link href={href}>{icon} {label}</Link>
+      </Button>
+    </Protect>
   )
 }
 
@@ -160,14 +155,14 @@ function OrganizationDashboard({ organization }: { organization: Organization })
               href="/analysis"
               icon="📊"
               label="View Analytics"
-              requiredPlans={['business_starter', 'business_standard', 'enterprise']}
+              feature="widgets"
               requiredPlanLabel="Business Starter"
             />
             <FeatureButton
               href="/audit"
               icon="🔒"
               label="Security Audit"
-              requiredPlans={['business_standard', 'enterprise']}
+              feature="security_audit"
               requiredPlanLabel="Business Standard"
             />
           </CardContent>
