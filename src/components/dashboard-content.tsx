@@ -152,7 +152,7 @@ function OrganizationDashboard({ organization }: { organization: Organization })
           </CardHeader>
           <CardContent className="space-y-4">
             <FeatureButton
-              href="/analysis"
+              href="/analytics"
               icon="📊"
               label="View Analytics"
               feature="analytics"

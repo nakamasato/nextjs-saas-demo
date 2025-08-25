@@ -21,8 +21,8 @@ export function Header() {
               <Link href="/" className="text-sm font-medium hover:underline underline-offset-4">
                 Dashboard
               </Link>
-              <Link href="/analysis" className="text-sm font-medium hover:underline underline-offset-4">
-                Analysis
+              <Link href="/analytics" className="text-sm font-medium hover:underline underline-offset-4">
+                Analytics
               </Link>
               <Link href="/audit" className="text-sm font-medium hover:underline underline-offset-4">
                 Audit

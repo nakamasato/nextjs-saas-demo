@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { BarChart3, TrendingUp, Users, DollarSign, Lock } from 'lucide-react'
 import Link from 'next/link'
 
-export default async function AnalysisPage() {
+export default async function AnalyticsPage() {
   const { userId, orgId, has } = await auth()
   
   if (!userId) {
@@ -27,7 +27,7 @@ export default async function AnalysisPage() {
       <div className="relative">
         {/* Blurred content */}
         <div className={hasAccess ? '' : 'blur-sm pointer-events-none'}>
-          <AnalysisContent />
+          <AnalyticsContent />
         </div>
         
         {/* Overlay for non-subscribers */}
@@ -38,13 +38,13 @@ export default async function AnalysisPage() {
                 <Lock className="h-16 w-16 mx-auto mb-4 text-gray-400" />
                 <h1 className="text-3xl font-bold mb-2">Upgrade Required</h1>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Access to Business Analysis requires Business Starter plan or higher.
+                  Access to Business Analytics requires Business Starter plan or higher.
                 </p>
               </div>
               
               <Card className="mb-8">
                 <CardHeader>
-                  <CardTitle>Business Analysis Features</CardTitle>
+                  <CardTitle>Business Analytics Features</CardTitle>
                   <CardDescription>Unlock comprehensive analytics and insights</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -67,12 +67,12 @@ export default async function AnalysisPage() {
   )
 }
 
-function AnalysisContent() {
+function AnalyticsContent() {
   return (
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Business Analysis</h1>
+          <h1 className="text-3xl font-bold mb-2">Business Analytics</h1>
           <p className="text-gray-600 dark:text-gray-400">
             Comprehensive analytics and insights for your business.
           </p>
