@@ -25,7 +25,7 @@ export default function PricingPage() {
 
         {/* Clerk Pricing Table */}
         <div className="max-w-7xl mx-auto mb-16">
-          <PricingTable forOrganizations />
+          <PricingTable for="organization" />
         </div>
 
         {/* Organization Billing Notice */}

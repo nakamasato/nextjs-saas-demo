@@ -2,7 +2,7 @@
 
 import { ClerkProvider } from '@clerk/nextjs'
 import { jaJP } from '@clerk/localizations'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 interface LocaleProviderProps {
   children: React.ReactNode
@@ -32,24 +32,7 @@ function getPreferredLanguage(): 'en' | 'ja' {
 }
 
 export function LocaleProvider({ children }: LocaleProviderProps) {
-  const [locale, setLocale] = useState<'en' | 'ja'>('en')
-  const [isLoaded, setIsLoaded] = useState(false)
-
-  useEffect(() => {
-    const preferredLang = getPreferredLanguage()
-    setLocale(preferredLang)
-    setIsLoaded(true)
-  }, [])
-
-  // Don't render until we know the preferred language to avoid hydration mismatch
-  if (!isLoaded) {
-    return (
-      <ClerkProvider>
-        {children}
-      </ClerkProvider>
-    )
-  }
-
+  const [locale] = useState<'en' | 'ja'>(() => getPreferredLanguage())
   const localization = locale === 'ja' ? jaJP : undefined
 
   return (
@@ -61,12 +44,7 @@ export function LocaleProvider({ children }: LocaleProviderProps) {
 
 // Custom hook to manage language switching
 export function useLanguage() {
-  const [locale, setLocaleState] = useState<'en' | 'ja'>('en')
-
-  useEffect(() => {
-    const preferredLang = getPreferredLanguage()
-    setLocaleState(preferredLang)
-  }, [])
+  const [locale, setLocaleState] = useState<'en' | 'ja'>(() => getPreferredLanguage())
 
   const setLocale = (newLocale: 'en' | 'ja') => {
     setLocaleState(newLocale)
