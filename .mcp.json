@@ -20,6 +20,14 @@
     "stripe": {
       "type": "http",
       "url": "https://mcp.stripe.com/"
+    },
+    "next-devtools": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "next-devtools-mcp@latest"
+      ],
+      "env": {}
     }
   }
 }
