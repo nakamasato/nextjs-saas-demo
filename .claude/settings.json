@@ -12,7 +12,9 @@
       "Bash(git pull:*)",
       "Bash(git push:*)",
       "Bash(git restore:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Edit(/tmp/**)",
+      "Edit(~/.npm/_cacache/tmp/**)"
     ],
     "deny": ["Bash(sudo:*)", "Read(.env.*)", "Write(.env*)"]
   },
