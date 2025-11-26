@@ -27,7 +27,7 @@
     "@eslint/eslintrc": "^3.3.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^24.0.0",
-    "@types/react": "19.2.6",
+    "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
@@ -42,7 +42,7 @@
     ]
   },
   "overrides": {
-    "@types/react": "19.2.6",
+    "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3"
   }
 }
